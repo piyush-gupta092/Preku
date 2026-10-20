@@ -16,7 +16,7 @@ Everything stays on your computer: no account, no telemetry, no cloud.
 
 ## Install
 
-Download the installer from **[the Preku website](https://OWNER.github.io/preku/)** or the [latest release](../../releases/latest), then run it. The installer isn't code-signed yet, so Windows SmartScreen asks once: choose **More info → Run anyway**.
+Download the installer from **[the Preku website](https://piyush-gupta092.github.io/Preku/)** or the [latest release](https://github.com/piyush-gupta092/Preku/releases/latest), then run it. The installer isn't code-signed yet, so Windows SmartScreen asks once: choose **More info → Run anyway**.
 
 ---
 
@@ -44,7 +44,7 @@ Start from an example: [`kind-words.json`](skills/examples/kind-words.json) (tho
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/<owner>/preku/main/skills/schema/skill-1.schema.json",
+  "$schema": "https://raw.githubusercontent.com/piyush-gupta092/Preku/main/skills/schema/skill-1.schema.json",
   "formatVersion": 1,
   "id": "io.github.yourname.stretch-break",
   "name": "Stretch break",
