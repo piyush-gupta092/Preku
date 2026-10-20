@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <clipPath id="squircle"><rect x="32" y="32" width="960" height="960" rx="224"/></clipPath>
+    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B2250"/><stop offset="1" stop-color="#151221"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.62" r="0.6">
+      <stop offset="0" stop-color="#7C5CFF" stop-opacity="0.75"/><stop offset="1" stop-color="#7C5CFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g clip-path="url(#squircle)">
+    <rect x="32" y="32" width="960" height="960" fill="url(#dusk)"/>
+    <rect x="32" y="32" width="960" height="960" fill="url(#glow)"/>
+    <circle cx="250" cy="230" r="13" fill="#fff" opacity="0.8"/>
+    <circle cx="770" cy="180" r="9" fill="#fff" opacity="0.7"/>
+    <circle cx="640" cy="300" r="7" fill="#fff" opacity="0.5"/>
+    <path d="M494 520 C 452 394, 336 366, 264 414 C 316 490, 408 532, 494 520 Z" fill="#5BD16E"/>
+    <path d="M530 520 C 572 394, 688 366, 760 414 C 708 490, 616 532, 530 520 Z" fill="#46B85A"/>
+    <ellipse cx="512" cy="900" rx="400" ry="390" fill="#FFB38A"/>
+    <ellipse cx="392" cy="762" rx="52" ry="76" fill="#1A1423"/>
+    <ellipse cx="632" cy="762" rx="52" ry="76" fill="#1A1423"/>
+    <circle cx="410" cy="730" r="18" fill="#fff"/>
+    <circle cx="650" cy="730" r="18" fill="#fff"/>
+    <ellipse cx="274" cy="880" rx="62" ry="46" fill="#FF7A7A" opacity="0.5"/>
+    <ellipse cx="750" cy="880" rx="62" ry="46" fill="#FF7A7A" opacity="0.5"/>
+    <path d="M466 884 Q 512 934 558 884" fill="none" stroke="#1A1423" stroke-width="22" stroke-linecap="round"/>
+  </g>
+</svg>

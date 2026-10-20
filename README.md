@@ -16,7 +16,7 @@ Everything stays on your computer: no account, no telemetry, no cloud.
 
 ## Install
 
-Download `Preku_<version>_x64-setup.exe` from the releases page and run it. The installer isn't code-signed yet, so Windows SmartScreen asks once: choose **More info → Run anyway**.
+Download the installer from **[the Preku website](https://OWNER.github.io/preku/)** or the [latest release](../../releases/latest), then run it. The installer isn't code-signed yet, so Windows SmartScreen asks once: choose **More info → Run anyway**.
 
 ---
 

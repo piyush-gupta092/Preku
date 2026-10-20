@@ -1,0 +1,47 @@
+name: Release
+
+# Push a tag such as v0.1.0 and this builds the Windows installer and publishes it as a GitHub
+# release. The website's download button always points at the newest release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    name: Windows installer
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: desktop/pnpm-lock.yaml
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: desktop/src-tauri
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm tauri build --bundles nsis
+
+      - name: Publish the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          installer=$(ls src-tauri/target/release/bundle/nsis/*-setup.exe)
+          gh release create "$TAG" "$installer" \
+            --title "Preku ${TAG#v}" \
+            --notes "Download **$(basename "$installer")**, run it, and Pip appears at the top of your screen. The installer isn't code-signed yet: if Windows shows \"Windows protected your PC\", choose **More info → Run anyway**."

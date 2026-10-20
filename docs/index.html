@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preku · a little space for your day</title>
+  <meta name="description" content="Preku is a tiny companion in a notch at the top of your screen: focus timer, tasks, clipboard, system health and gentle wellbeing nudges, with an animated mascot called Pip. Free for Windows. No account, no cloud." />
+  <meta property="og:title" content="Preku · a little space for your day" />
+  <meta property="og:description" content="Focus, tasks, system health and gentle nudges in one calm notch at the top of your screen. Free for Windows." />
+  <meta property="og:image" content="assets/home.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0d12;
+      --bg-2: #15151d;
+      --surface: #1b1b25;
+      --border: #2a2a37;
+      --text: #f4f3f8;
+      --muted: #a3a2b3;
+      --brand: #7c5cff;
+      --brand-2: #9d85ff;
+      --pip: #ffb38a;
+      --productivity: #ffb020;
+      --monitor: #22c7b8;
+      --wellbeing: #5bd16e;
+      --bridge: #3da5ff;
+      --radius: 20px;
+      --font: "Plus Jakarta Sans", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #faf9fd;
+        --bg-2: #f1effa;
+        --surface: #ffffff;
+        --border: #e3e0ee;
+        --text: #17161f;
+        --muted: #5e5c70;
+        --brand: #6a47f5;
+        --brand-2: #6a47f5;
+      }
+    }
+    :root[data-theme="dark"] { color-scheme: dark; }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 17px/1.6 var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--brand-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+    /* Top bar */
+    header.top {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+    }
+    header.top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 800; font-size: 20px; }
+    .logo img { width: 34px; height: 34px; }
+    .logo:hover { text-decoration: none; }
+    nav.links { display: flex; gap: 22px; margin-left: auto; font-weight: 600; font-size: 15px; }
+    nav.links a { color: var(--muted); }
+    nav.links a:hover { color: var(--text); text-decoration: none; }
+    @media (max-width: 720px) { nav.links .hide-sm { display: none; } }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 24px; border-radius: 999px;
+      font: 700 16px/1 var(--font); cursor: pointer; border: 0;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { color: #fff; background: var(--brand); box-shadow: 0 10px 30px -10px var(--brand); }
+    .btn.primary:hover { background: #6b49ff; }
+    .btn.ghost { color: var(--text); background: transparent; border: 1px solid var(--border); }
+    .btn svg { width: 20px; height: 20px; flex: none; }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; padding: 72px 0 40px; text-align: center; }
+    .hero::before {
+      content: ""; position: absolute; inset: -40% -10% auto; height: 620px; z-index: -1;
+      background:
+        radial-gradient(closest-side, color-mix(in srgb, var(--brand) 32%, transparent), transparent),
+        radial-gradient(closest-side at 70% 60%, color-mix(in srgb, var(--pip) 18%, transparent), transparent);
+    }
+    .hero .icon { width: 96px; height: 96px; margin: 0 auto 22px; filter: drop-shadow(0 12px 30px rgba(124, 92, 255, .45)); }
+    .eyebrow { display: inline-block; margin-bottom: 14px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-size: 14px; font-weight: 600; }
+    h1 { margin: 0 auto; max-width: 820px; font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 800; }
+    h1 .soft { background: linear-gradient(90deg, var(--pip), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { max-width: 640px; margin: 20px auto 0; color: var(--muted); font-size: 19px; }
+    .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+    .fine { margin-top: 14px; color: var(--muted); font-size: 14px; }
+    .shot-hero { position: relative; margin: 56px auto 0; max-width: 620px; }
+    .shot-hero img { border-radius: 0 0 28px 28px; filter: drop-shadow(0 30px 60px rgba(0,0,0,.45)); }
+    .shot-hero .pill { position: absolute; left: 50%; bottom: -34px; width: 66%; transform: translateX(-50%); filter: drop-shadow(0 16px 30px rgba(0,0,0,.4)); }
+
+    section { padding: 88px 0; }
+    .section-title { margin: 0 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 800; }
+    .section-lead { margin: 0 0 40px; max-width: 640px; color: var(--muted); font-size: 18px; }
+    .center { text-align: center; }
+    .center .section-lead { margin-inline: auto; }
+
+    /* Feature cards */
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card { padding: 26px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .card h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 19px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c, var(--brand)); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c, var(--brand)) 22%, transparent); }
+
+    /* Showcase rows */
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .row + .row { margin-top: 96px; }
+    .row.flip .text { order: 2; }
+    .row h3 { margin: 0 0 12px; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; letter-spacing: -0.02em; }
+    .row p { margin: 0 0 14px; color: var(--muted); }
+    .row ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    .row li { margin: 6px 0; }
+    .row img { border-radius: 24px; filter: drop-shadow(0 24px 48px rgba(0,0,0,.4)); }
+    .row img.framed { border: 1px solid var(--border); border-radius: 18px; }
+    .tag { display: inline-block; margin-bottom: 12px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--brand-2)); }
+    @media (max-width: 860px) {
+      .row { grid-template-columns: 1fr; gap: 28px; }
+      .row.flip .text { order: 0; }
+    }
+
+    /* Privacy band */
+    .band { background: var(--bg-2); border-block: 1px solid var(--border); }
+    .promises { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+    .promise b { display: block; margin-bottom: 4px; font-size: 17px; }
+    .promise span { color: var(--muted); font-size: 15px; }
+
+    /* Code */
+    pre {
+      margin: 0; padding: 22px; overflow-x: auto;
+      background: #0a0a0f; color: #e8e6f3; border: 1px solid var(--border); border-radius: 16px;
+      font: 13.5px/1.6 ui-monospace, "Cascadia Mono", "JetBrains Mono", Consolas, monospace;
+    }
+    .k { color: #9d85ff; } .s { color: #ffc7a8; } .n { color: #6ee7b7; }
+
+    /* Download */
+    .download { text-align: center; }
+    .download .box { max-width: 720px; margin: 0 auto; padding: 48px 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; }
+    .download img { width: 84px; height: 84px; margin: 0 auto 18px; }
+    .steps { display: grid; gap: 12px; max-width: 520px; margin: 32px auto 0; padding: 0; list-style: none; text-align: left; counter-reset: step; }
+    .steps li { position: relative; padding-left: 44px; color: var(--muted); font-size: 15.5px; }
+    .steps li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%;
+      display: grid; place-items: center; font-weight: 700; font-size: 14px; color: var(--text); background: var(--bg-2); border: 1px solid var(--border);
+    }
+    .steps b { color: var(--text); }
+
+    /* FAQ */
+    details { padding: 18px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
+    details + details { margin-top: 12px; }
+    summary { cursor: pointer; font-weight: 700; }
+    details p { margin: 10px 0 0; color: var(--muted); }
+
+    footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; justify-content: space-between; }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="#"><img src="assets/icon.svg" alt="" />Preku</a>
+      <nav class="links" aria-label="Sections">
+        <a class="hide-sm" href="#features">Features</a>
+        <a class="hide-sm" href="#skills">Skills</a>
+        <a class="hide-sm" href="#faq">FAQ</a>
+        <a class="repo-link" href="#">GitHub</a>
+        <a href="#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <img class="icon" src="assets/icon.svg" alt="Preku app icon: Pip peeking over the edge" />
+        <span class="eyebrow">Free for Windows · No account · No cloud</span>
+        <h1>A little space for <span class="soft">your day</span>.</h1>
+        <p class="lead">
+          Preku lives in a small notch at the top of your screen. Your focus timer, tasks, system
+          health and gentle wellbeing nudges sit in one calm place, looked after by Pip.
+        </p>
+        <div class="cta">
+          <a class="btn primary download-link" href="#download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            Download for Windows
+          </a>
+          <a class="btn ghost repo-link" href="#">View on GitHub</a>
+        </div>
+        <p class="fine release-info">Windows 10 and 11 · 64-bit · about 4 MB</p>
+        <div class="shot-hero">
+          <img src="assets/home.png" alt="The Preku notch opened: time, weather, music controls and tiles for Productivity, System and Wellbeing" width="1020" height="630" />
+          <img class="pill" src="assets/compact.png" alt="A small nudge in the notch: Rest your eyes?" width="654" height="118" />
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="center">
+          <h2 class="section-title">Everything you glance at, in one quiet place</h2>
+          <p class="section-lead">Pull the notch open when you need it. It tucks itself away when you don't.</p>
+        </div>
+        <div class="grid">
+          <div class="card" style="--c: var(--productivity)"><h3><span class="dot"></span>Productivity</h3><p>A focus timer, tasks with up to three priorities a day, reminders, clipboard history and music controls. Calendar is optional.</p></div>
+          <div class="card" style="--c: var(--monitor)"><h3><span class="dot"></span>System</h3><p>CPU, memory, disk, network and battery at a glance, with alerts. For developers: Docker, GitHub Actions, website checks and <code>preku watch</code>.</p></div>
+          <div class="card" style="--c: var(--wellbeing)"><h3><span class="dot"></span>Wellbeing</h3><p>Eye, movement and posture breaks at unpredictable moments, water, habits with streaks, screen time and a weekly reflection.</p></div>
+          <div class="card" style="--c: var(--bridge)"><h3><span class="dot"></span>Phone</h3><p>Pair your phone over your own Wi-Fi. Send files, text and links both ways, with no cable and no cloud in between.</p></div>
+          <div class="card" style="--c: var(--pip)"><h3><span class="dot"></span>A moment for you</h3><p>Once a day Pip greets you with a short thought and a word about the weather. Save the ones you like.</p></div>
+          <div class="card"><h3><span class="dot"></span>Quiet when it matters</h3><p>Reminders wait while you focus, game or present, and nudges never stack up while you're away.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="row">
+          <div class="text">
+            <span class="tag" style="--c: var(--productivity)">Productivity</span>
+            <h3>Know what's next, and start it in one click.</h3>
+            <p>Your tasks and today's recap are right in the notch. Star up to three priorities, set a reminder, and start a focus session on any task.</p>
+            <ul>
+              <li>Quick capture: a shortcut opens the notch ready to type</li>
+              <li>Focus minutes count toward the task you're working on</li>
+              <li>Clipboard history with pins, and a private mode</li>
+            </ul>
+          </div>
+          <img src="assets/tasks.png" alt="The Tasks tab: today's priority with a Focus button, and a task list" width="1020" height="760" loading="lazy" />
+        </div>
+
+        <div class="row flip">
+          <div class="text">
+            <span class="tag" style="--c: var(--wellbeing)">Wellbeing</span>
+            <h3>Gentle nudges, never nagging.</h3>
+            <p>Breaks arrive at slightly unpredictable moments so they don't feel mechanical. They count only the time you're actually at the PC, and wait while you focus or present.</p>
+            <ul>
+              <li>Water, habits with streaks, bedtime and meals</li>
+              <li>Screen time by app, kept on your PC</li>
+              <li>A short weekly reflection, with no scores and no guilt</li>
+            </ul>
+          </div>
+          <img src="assets/wellbeing.png" alt="The Wellbeing view: water progress ring, next break, habits and screen time" width="1020" height="760" loading="lazy" />
+        </div>
+
+        <div class="row">
+          <div class="text">
+            <span class="tag" style="--c: var(--pip)">A moment for you</span>
+            <h3>One kind thought a day.</h3>
+            <p>The first time you open the notch each day, Pip says hello, mentions the weather, and offers a thought to carry with you. Save it, or dismiss it until tomorrow.</p>
+          </div>
+          <img src="assets/moment.png" alt="A moment for you: Pip with today's thought and Save and Dismiss buttons" width="1020" height="682" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="center">
+          <h2 class="section-title">Yours, and only yours</h2>
+          <p class="section-lead">Preku is built to be trusted on the computer you use all day.</p>
+        </div>
+        <div class="promises">
+          <div class="promise"><b>No account</b><span>Install it and it works. There is nothing to sign up for.</span></div>
+          <div class="promise"><b>No telemetry</b><span>Preku never reports what you do. Your data stays in a folder on your PC.</span></div>
+          <div class="promise"><b>Secrets in the keychain</b><span>Tokens and calendar links are kept in Windows' own credential store.</span></div>
+          <div class="promise"><b>Open source</b><span>MIT licensed. Read every line of it on GitHub.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="row">
+          <div class="text">
+            <span class="tag">Skills</span>
+            <h3>Make Preku yours, and share it.</h3>
+            <p>A skill is one small file that adds thoughts, nudges or short sounds. Anyone can make one in a few minutes and share it with everyone.</p>
+            <p>Skills can't run code, read your data or go online. They only add words and sounds, so they're safe to install from anywhere.</p>
+            <div class="cta" style="justify-content: flex-start; margin-top: 22px">
+              <a class="btn ghost" data-repo-path="/tree/main/skills/community" href="#">Browse skills</a>
+              <a class="btn ghost" data-repo-path="#make-a-skill" href="#">Make a skill</a>
+            </div>
+          </div>
+          <img class="framed" src="assets/skills.jpg" alt="Settings, Skills page: two installed skills with switches, a sound preview and Remove buttons" width="1100" height="1002" loading="lazy" />
+        </div>
+        <div style="margin-top: 48px">
+<pre><code>{
+  <span class="k">"formatVersion"</span>: <span class="n">1</span>,
+  <span class="k">"id"</span>: <span class="s">"io.github.yourname.stretch-break"</span>,
+  <span class="k">"name"</span>: <span class="s">"Stretch break"</span>,
+  <span class="k">"version"</span>: <span class="s">"1.0.0"</span>,
+  <span class="k">"author"</span>: { <span class="k">"name"</span>: <span class="s">"Your Name"</span> },
+  <span class="k">"description"</span>: <span class="s">"A friendly stretch reminder during working hours."</span>,
+  <span class="k">"contributes"</span>: {
+    <span class="k">"thoughts"</span>: [{ <span class="k">"text"</span>: <span class="s">"Your body is part of the work too."</span> }],
+    <span class="k">"nudges"</span>: [{
+      <span class="k">"id"</span>: <span class="s">"stretch"</span>,
+      <span class="k">"lines"</span>: [<span class="s">"Stand up and reach for the ceiling?"</span>],
+      <span class="k">"everyMin"</span>: <span class="n">50</span>, <span class="k">"between"</span>: [<span class="s">"09:00"</span>, <span class="s">"18:00"</span>]
+    }]
+  }
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="download" class="download band">
+      <div class="wrap">
+        <div class="box">
+          <img src="assets/icon.svg" alt="" />
+          <h2 class="section-title">Get Preku</h2>
+          <p class="section-lead" style="margin-inline: auto">Free and open source. Windows 10 and 11, 64-bit.</p>
+          <a class="btn primary download-link" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            <span class="download-label">Download the installer</span>
+          </a>
+          <p class="fine release-info">Windows 10 and 11 · 64-bit · about 4 MB</p>
+          <p class="fine"><a class="releases-link" href="#">All versions and release notes</a></p>
+          <ol class="steps">
+            <li>Run the <b>Preku setup</b> file you downloaded. Preku isn't code-signed yet, so Windows may show "Windows protected your PC": choose <b>More info → Run anyway</b>.</li>
+            <li>Pip appears at the top of your screen. <b>Click or pull it down</b> to open the notch, or press <b>Ctrl + Alt + Space</b>.</li>
+            <li>Open <b>Settings</b> (the gear) to pick what shows in your notch, and turn on <b>Launch Preku when I sign in</b>.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap" style="max-width: 780px">
+        <h2 class="section-title center">Questions</h2>
+        <div style="margin-top: 28px">
+          <details><summary>Is Preku free?</summary><p>Yes. Preku is free and open source under the MIT license.</p></details>
+          <details><summary>Why does Windows warn me when I install it?</summary><p>Code-signing certificates are expensive and Preku is a young independent project, so the installer isn't signed yet. Windows SmartScreen shows a warning for unsigned apps. You can check the source code and build it yourself from GitHub.</p></details>
+          <details><summary>Does Preku send my data anywhere?</summary><p>No. There's no account and no telemetry. Preku only goes online for things you turn on: the weather for a city you choose, a calendar link you add, or GitHub builds and websites you ask it to watch.</p></details>
+          <details><summary>Will it get in the way while I work?</summary><p>Preku stays a thin pill until you need it. Reminders wait during focus sessions, games and presentations, and you can pause everything from the tray.</p></details>
+          <details><summary>Mac or Linux?</summary><p>Windows is the main platform today. A Linux build is in progress. There's no Mac version yet.</p></details>
+          <details><summary>How do I uninstall it?</summary><p>Settings → Apps → Installed apps → Preku → Uninstall. In Preku, Settings → General can also export or delete all your data first.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Piyush Gupta · Preku is MIT licensed</span>
+      <span><a class="repo-link" href="#">Source on GitHub</a> · <a class="releases-link" href="#">Releases</a> · <a data-repo-path="/issues" href="#">Report a problem</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // The GitHub repository this site belongs to ("owner/name").
+    const REPO = "OWNER/preku";
+
+    const base = `https://github.com/${REPO}`;
+    const releases = `${base}/releases/latest`;
+    document.querySelectorAll(".repo-link").forEach((a) => (a.href = base));
+    document.querySelectorAll(".releases-link").forEach((a) => (a.href = releases));
+    document.querySelectorAll("[data-repo-path]").forEach((a) => (a.href = base + a.dataset.repoPath));
+    document.querySelectorAll(".download-link").forEach((a) => (a.href = releases));
+
+    // Point the download buttons straight at the newest installer.
+    fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers: { Accept: "application/vnd.github+json" } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((release) => {
+        const asset = release.assets.find((a) => /setup\.exe$/i.test(a.name));
+        if (!asset) return;
+        const mb = (asset.size / 1048576).toFixed(1);
+        const version = release.tag_name.replace(/^v/, "");
+        document.querySelectorAll(".download-link").forEach((a) => {
+          a.href = asset.browser_download_url;
+          a.setAttribute("download", "");
+        });
+        document.querySelectorAll(".download-label").forEach((s) => (s.textContent = `Download Preku ${version}`));
+        document.querySelectorAll(".release-info").forEach((p) => (p.textContent = `Version ${version} · Windows 10 and 11 · 64-bit · ${mb} MB`));
+      })
+      .catch(() => {
+        // Offline, rate-limited or no release yet: the buttons open the Releases page instead.
+      });
+  </script>
+</body>
+</html>
