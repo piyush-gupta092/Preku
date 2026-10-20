@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "device-status.schema.json",
+  "title": "DeviceStatus",
+  "x-type": "device.status",
+  "description": "Phone → PC: battery and connectivity, on connect and whenever they change.",
+  "type": "object",
+  "required": ["battery", "charging", "network"],
+  "properties": {
+    "battery": { "type": "integer", "format": "uint32", "minimum": 0, "maximum": 100, "description": "Percent." },
+    "charging": { "type": "boolean" },
+    "network": { "type": "string", "description": "wifi | cellular | ethernet | none" }
+  }
+}

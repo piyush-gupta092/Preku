@@ -1,0 +1,111 @@
+/* Design tokens — source of truth: /Design.md. Components must use these, never raw values. */
+
+:root {
+  /* Island surface (same in light and dark) */
+  --island-bg: #0b0b0f;
+  --island-bg-raised: #17171d;
+  --island-border: rgba(255, 255, 255, 0.08);
+  --island-text: #f5f5f7;
+  --island-text-muted: #9a9aa5;
+
+  /* Brand */
+  --brand: #7c5cff;
+  --brand-hover: #6a48f5;
+  --brand-soft: rgba(124, 92, 255, 0.16);
+  --pip-body: #ffb38a;
+  --pip-cheek: #ff7a7a;
+  --pip-eye: #1a1423;
+  --pip-shade: rgba(160, 70, 30, 0.12);
+  --pip-highlight: #ffffff;
+
+  /* Module accents */
+  --mod-productivity: #ffb020;
+  --mod-bridge: #3da5ff;
+  --mod-monitor: #22c7b8;
+  --mod-wellbeing: #5bd16e;
+  --mod-weather: #ff8a5c;
+
+  /* Semantic */
+  --success: #34c759;
+  --warning: #ff9f0a;
+  --danger: #ff453a;
+  --info: #3da5ff;
+
+  /* App surfaces — light */
+  --bg: #f7f7fa;
+  --surface: #ffffff;
+  --surface-2: #efeff4;
+  --border: #e2e2ea;
+  --text: #14141a;
+  --text-muted: #5e5e6b;
+
+  /* Typography */
+  --font-ui:
+    "Plus Jakarta Sans Variable", "Segoe UI Variable", "Segoe UI", "Cantarell", "Noto Sans",
+    system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", "DejaVu Sans Mono", monospace;
+
+  --text-display: 700 28px / 34px var(--font-ui);
+  --text-title: 700 18px / 24px var(--font-ui);
+  --text-heading: 600 15px / 20px var(--font-ui);
+  --text-body: 500 13px / 18px var(--font-ui);
+  --text-caption: 500 11px / 14px var(--font-ui);
+  --text-pill: 600 12px / 16px var(--font-ui);
+  --text-mono: 500 13px / 16px var(--font-mono);
+
+  /* Spacing (4-pt) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-island: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--brand);
+}
+
+/* App surfaces — dark (system preference unless the user forced light) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f14;
+    --surface: #18181f;
+    --surface-2: #22222b;
+    --border: #2e2e38;
+    --text: #f2f2f7;
+    --text-muted: #a0a0ad;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f0f14;
+  --surface: #18181f;
+  --surface-2: #22222b;
+  --border: #2e2e38;
+  --text: #f2f2f7;
+  --text-muted: #a0a0ad;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-base: 120ms;
+    --dur-slow: 120ms;
+  }
+}

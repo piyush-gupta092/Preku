@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-offer.schema.json",
+  "title": "FileOffer",
+  "x-type": "file.offer",
+  "description": "Either side: \"I want to send you this file\". Paired devices accept automatically.",
+  "type": "object",
+  "required": ["transferId", "name", "size", "sha256"],
+  "properties": {
+    "transferId": { "type": "string", "format": "uuid" },
+    "name": { "type": "string", "description": "File name only, no folders. The receiver sanitizes it." },
+    "size": { "type": "integer", "description": "Bytes." },
+    "mime": { "type": "string" },
+    "sha256": { "type": "string", "description": "Lowercase hex SHA-256 of the whole file, checked on arrival." }
+  }
+}

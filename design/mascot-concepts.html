@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pip Concepts</title>
+<style>
+  :root {
+    --bg: #f6f4ff;
+    --card: #ffffff;
+    --text: #1d1530;
+    --muted: #6b6480;
+    --line: #e6e1f5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 28px 32px 40px;
+    font: 500 14px/1.4 "Segoe UI", system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+  }
+  h1 { margin: 0 0 4px; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+  .sub { margin: 0 0 22px; color: var(--muted); }
+  .concept {
+    margin-bottom: 18px;
+    padding: 16px 20px 10px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+  .head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .head h2 { margin: 0; font-size: 18px; font-weight: 800; }
+  .head span { color: var(--muted); }
+  .row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  figure { margin: 0; text-align: center; }
+  svg { width: 100%; height: auto; display: block; }
+  figcaption { margin-top: -4px; font-size: 12px; color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Pip — new body concepts</h1>
+<p class="sub">Three directions, five poses each. Arms and legs are two-segment limbs driven by joint angles, so every pose here can be animated.</p>
+<div id="sheet"></div>
+
+<script>
+const INK = "#3b2418";
+const PEACH = "#ffb38a";
+const PEACH_SHADE = "#f59a6c";
+const LEAF = "#6cc95c";
+const LEAF_DARK = "#4aa53c";
+const CHEEK = "#ff8a80";
+const SHEET = "#ffc29f";
+
+// ---- Poses: [upper, lower] segment angles in degrees, 0 = straight down, + = outwards/up ----
+const POSES = {
+  // Raised arms go out first, then up at the elbow, so the hand clears the big head.
+  wave:  { label: "Waving hello", armL: [100, 60], armR: [40, -95], legL: [8, -4], legR: [8, -4], face: "smile" },
+  dance: { label: "Disco dance", armL: [40, -95], armR: [115, 35], legL: [45, -40], legR: [-6, 6], tilt: -6, face: "joy" },
+  run:   { label: "Running", armL: [-55, -95], armR: [50, 85], legL: [-40, 70], legR: [38, -10], tilt: 8, face: "smile" },
+  cheer: { label: "Cheering jump", armL: [115, 30], armR: [115, 30], legL: [25, -55], legR: [25, -55], lift: 14, face: "joy" },
+  think: { label: "Thinking", armL: [20, 10], armR: [25, 175], legL: [4, 0], legR: [-12, 18], face: "think" },
+};
+
+// ---- The three body concepts ----
+const CONCEPTS = [
+  {
+    name: "A · Sprout Pip",
+    note: "Like the reference: round head, bean body, noodle limbs, mitten hands, big shoes.",
+    shoulder: { x: 17, y: 132 }, hip: { x: 9, y: 166 },
+    arm: [26, 24], armW: 9, leg: [28, 27], legW: 10, hand: 8, foot: [13, 8],
+    body(g) {
+      g += el("ellipse", { cx: 100, cy: 148, rx: 21, ry: 25, fill: PEACH, stroke: INK, "stroke-width": 4 });
+      g += head(100, 82, 47, 43);
+      return g;
+    },
+    faceAt: { x: 100, y: 88, scale: 1 },
+  },
+  {
+    name: "B · Ghost Pip",
+    note: "A soft ghost-sheet cover is the head and face; arms poke out of the sides, legs peek out under the wavy hem.",
+    shoulder: { x: 44, y: 126 }, hip: { x: 13, y: 160 },
+    arm: [20, 18], armW: 9, leg: [22, 20], legW: 10, hand: 8, foot: [12, 7],
+    body(g) {
+      // Dome + wavy hem.
+      const hem = [];
+      for (let i = 0; i <= 6; i++) {
+        const x = 52 + i * 16;
+        hem.push(`${x} ${i % 2 ? 170 : 160}`);
+      }
+      const d =
+        "M 52 160 C 46 80, 154 80, 148 160 " +
+        // wavy hem from right to left
+        "Q 140 172 132 162 Q 124 172 116 162 Q 108 172 100 162 Q 92 172 84 162 Q 76 172 68 162 Q 60 172 52 160 Z";
+      g += el("path", { d, fill: SHEET, stroke: INK, "stroke-width": 4, "stroke-linejoin": "round" });
+      // Soft fold shading on the sheet.
+      g += el("path", { d: "M 64 150 C 62 120, 70 100, 82 92", fill: "none", stroke: "#ffffff", "stroke-width": 5, "stroke-linecap": "round", opacity: 0.55 });
+      g += el("path", { d: "M 120 158 C 126 140, 128 128, 126 118", fill: "none", stroke: PEACH_SHADE, "stroke-width": 3, "stroke-linecap": "round", opacity: 0.6 });
+      g += leaves(100, 84, 0.9);
+      return g;
+    },
+    faceAt: { x: 100, y: 118, scale: 1 },
+  },
+  {
+    name: "C · Chubby Pip",
+    note: "Betakkuma-style: big round head on a plump body, short thick limbs that still bend at elbows and knees.",
+    shoulder: { x: 30, y: 146 }, hip: { x: 17, y: 186 },
+    arm: [17, 15], armW: 14, leg: [15, 13], legW: 16, hand: 9.5, foot: [15, 9],
+    body(g) {
+      g += el("ellipse", { cx: 100, cy: 160, rx: 40, ry: 36, fill: PEACH, stroke: INK, "stroke-width": 4 });
+      g += el("ellipse", { cx: 100, cy: 168, rx: 22, ry: 20, fill: "#ffd2b8", opacity: 0.8 });
+      g += head(100, 92, 50, 44);
+      return g;
+    },
+    faceAt: { x: 100, y: 98, scale: 1.05 },
+  },
+];
+
+// ---- Drawing helpers ----
+function el(tag, attrs, inner = "") {
+  const a = Object.entries(attrs).map(([k, v]) => `${k}="${v}"`).join(" ");
+  return `<${tag} ${a}>${inner}</${tag}>`;
+}
+
+function leaves(x, y, s = 1) {
+  const leaf = (side) =>
+    el("path", {
+      d: `M ${x} ${y} C ${x + side * 6 * s} ${y - 30 * s}, ${x + side * 34 * s} ${y - 34 * s}, ${x + side * 40 * s} ${y - 22 * s} C ${x + side * 34 * s} ${y - 6 * s}, ${x + side * 14 * s} ${y + 2 * s}, ${x} ${y} Z`,
+      fill: LEAF, stroke: INK, "stroke-width": 3.5, "stroke-linejoin": "round",
+    }) +
+    el("path", {
+      d: `M ${x + side * 4 * s} ${y - 4 * s} Q ${x + side * 20 * s} ${y - 18 * s} ${x + side * 34 * s} ${y - 21 * s}`,
+      fill: "none", stroke: LEAF_DARK, "stroke-width": 2.5, "stroke-linecap": "round",
+    });
+  return leaf(-1) + leaf(1);
+}
+
+function head(cx, cy, rx, ry) {
+  return (
+    el("ellipse", { cx, cy, rx, ry, fill: PEACH, stroke: INK, "stroke-width": 4 }) +
+    el("ellipse", { cx: cx - rx * 0.45, cy: cy - ry * 0.55, rx: rx * 0.22, ry: ry * 0.12, fill: "#ffffff", opacity: 0.45, transform: `rotate(-25 ${cx - rx * 0.45} ${cy - ry * 0.55})` }) +
+    leaves(cx, cy - ry + 3)
+  );
+}
+
+function face(x, y, s, kind) {
+  let g = "";
+  const eye = (ex) => {
+    if (kind === "joy") {
+      return el("path", { d: `M ${ex - 6 * s} ${y + 2 * s} Q ${ex} ${y - 8 * s} ${ex + 6 * s} ${y + 2 * s}`, fill: "none", stroke: INK, "stroke-width": 4, "stroke-linecap": "round" });
+    }
+    const look = kind === "think" ? -4 * s : 0;
+    return (
+      el("ellipse", { cx: ex + (kind === "think" ? 2 : 0), cy: y + look, rx: 6.5 * s, ry: 9 * s, fill: INK }) +
+      el("circle", { cx: ex + 2.4 * s, cy: y + look - 3.5 * s, r: 2.2 * s, fill: "#fff" })
+    );
+  };
+  g += eye(x - 17 * s) + eye(x + 17 * s);
+  g += el("ellipse", { cx: x - 30 * s, cy: y + 14 * s, rx: 8 * s, ry: 5.5 * s, fill: CHEEK, opacity: 0.75 });
+  g += el("ellipse", { cx: x + 30 * s, cy: y + 14 * s, rx: 8 * s, ry: 5.5 * s, fill: CHEEK, opacity: 0.75 });
+  if (kind === "joy") {
+    g += el("path", { d: `M ${x - 8 * s} ${y + 10 * s} Q ${x} ${y + 22 * s} ${x + 8 * s} ${y + 10 * s} Z`, fill: INK, stroke: INK, "stroke-width": 2, "stroke-linejoin": "round" });
+    g += el("ellipse", { cx: x, cy: y + 16 * s, rx: 4 * s, ry: 2.5 * s, fill: "#ff7a8a" });
+  } else if (kind === "think") {
+    g += el("path", { d: `M ${x - 5 * s} ${y + 14 * s} L ${x + 6 * s} ${y + 12 * s}`, fill: "none", stroke: INK, "stroke-width": 3.5, "stroke-linecap": "round" });
+  } else {
+    g += el("path", { d: `M ${x - 7 * s} ${y + 11 * s} Q ${x} ${y + 18 * s} ${x + 7 * s} ${y + 11 * s}`, fill: "none", stroke: INK, "stroke-width": 3.5, "stroke-linecap": "round" });
+  }
+  return g;
+}
+
+/** Two-segment limb: start point, side (-1 left / +1 right), lengths and angles in degrees. */
+function joint(start, side, lengths, angles) {
+  const r = (deg) => (deg * Math.PI) / 180;
+  const a1 = r(angles[0]);
+  const a2 = r(angles[0] + angles[1]);
+  const mid = { x: start.x + side * Math.sin(a1) * lengths[0], y: start.y + Math.cos(a1) * lengths[0] };
+  const end = { x: mid.x + side * Math.sin(a2) * lengths[1], y: mid.y + Math.cos(a2) * lengths[1] };
+  return { mid, end, a2, side };
+}
+
+function limbPath(start, j) {
+  // A soft noodle through the elbow/knee.
+  return `M ${start.x} ${start.y} Q ${j.mid.x} ${j.mid.y} ${j.end.x} ${j.end.y}`;
+}
+
+function limb(start, j, width) {
+  const d = limbPath(start, j);
+  return (
+    el("path", { d, fill: "none", stroke: INK, "stroke-width": width + 7, "stroke-linecap": "round" }) +
+    el("path", { d, fill: "none", stroke: PEACH, "stroke-width": width, "stroke-linecap": "round" })
+  );
+}
+
+function hand(j, r) {
+  const thumbA = j.a2 + j.side * 1.1;
+  const tx = j.end.x + j.side * Math.sin(thumbA) * r * 0.9;
+  const ty = j.end.y + Math.cos(thumbA) * r * 0.9;
+  return (
+    el("circle", { cx: tx, cy: ty, r: r * 0.45, fill: PEACH, stroke: INK, "stroke-width": 3.5 }) +
+    el("circle", { cx: j.end.x, cy: j.end.y, r, fill: PEACH, stroke: INK, "stroke-width": 3.5 })
+  );
+}
+
+function foot(j, size) {
+  const toe = j.side * size[0] * 0.35;
+  return (
+    el("ellipse", { cx: j.end.x + toe, cy: j.end.y + size[1] * 0.4, rx: size[0], ry: size[1], fill: PEACH, stroke: INK, "stroke-width": 3.5 }) +
+    el("ellipse", { cx: j.end.x + toe - size[0] * 0.3, cy: j.end.y + size[1] * 0.1, rx: size[0] * 0.35, ry: size[1] * 0.3, fill: "#fff", opacity: 0.45 })
+  );
+}
+
+function figure(concept, pose) {
+  const L = { x: 100 - concept.shoulder.x, y: concept.shoulder.y };
+  const R = { x: 100 + concept.shoulder.x, y: concept.shoulder.y };
+  const HL = { x: 100 - concept.hip.x, y: concept.hip.y };
+  const HR = { x: 100 + concept.hip.x, y: concept.hip.y };
+
+  const armL = joint(L, -1, concept.arm, pose.armL);
+  const armR = joint(R, 1, concept.arm, pose.armR);
+  const legL = joint(HL, -1, concept.leg, pose.legL);
+  const legR = joint(HR, 1, concept.leg, pose.legR);
+
+  let g = "";
+  // Ground shadow.
+  g += el("ellipse", { cx: 100, cy: 238, rx: 44, ry: 6, fill: "#000", opacity: 0.08 });
+  let fig = "";
+  fig += limb(HL, legL, concept.legW) + limb(HR, legR, concept.legW);
+  fig += foot(legL, concept.foot) + foot(legR, concept.foot);
+  // Raised arms and hands on hips/chin are drawn in front; hanging arms behind the body.
+  const front = (a) => a[0] > 60 || a[1] < -60 || a[1] > 150;
+  if (!front(pose.armL)) fig += limb(L, armL, concept.armW) + hand(armL, concept.hand);
+  if (!front(pose.armR)) fig += limb(R, armR, concept.armW) + hand(armR, concept.hand);
+  fig = concept.body(fig);
+  fig += face(concept.faceAt.x, concept.faceAt.y, concept.faceAt.scale, pose.face);
+  if (front(pose.armL)) fig += limb(L, armL, concept.armW) + hand(armL, concept.hand);
+  if (front(pose.armR)) fig += limb(R, armR, concept.armW) + hand(armR, concept.hand);
+
+  const lift = pose.lift ?? 0;
+  g += `<g transform="translate(0 ${-lift}) rotate(${pose.tilt ?? 0} 100 220)">${fig}</g>`;
+  if (pose.face === "joy") {
+    g += el("text", { x: 172, y: 40, "font-size": 22, fill: "#8b7bff", "font-weight": 700 }, "♪");
+    g += el("text", { x: 20, y: 62, "font-size": 18, fill: "#8b7bff", "font-weight": 700 }, "♫");
+  }
+  if (pose.face === "think") {
+    g += el("circle", { cx: 160, cy: 40, r: 4, fill: "#c9c3e6" }) + el("circle", { cx: 172, cy: 26, r: 6.5, fill: "#c9c3e6" });
+  }
+  return `<svg viewBox="-10 -10 220 260" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
+}
+
+const sheet = document.getElementById("sheet");
+for (const concept of CONCEPTS) {
+  const cells = Object.values(POSES)
+    .map((pose) => `<figure>${figure(concept, pose)}<figcaption>${pose.label}</figcaption></figure>`)
+    .join("");
+  sheet.insertAdjacentHTML(
+    "beforeend",
+    `<section class="concept"><div class="head"><h2>${concept.name}</h2><span>${concept.note}</span></div><div class="row">${cells}</div></section>`,
+  );
+}
+</script>
+</body>
+</html>

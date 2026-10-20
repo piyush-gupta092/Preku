@@ -1,0 +1,35 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Node / desktop frontend
+node_modules/
+desktop/dist/
+*.log
+
+# Rust
+target/
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.kotlin/
+*.keystore
+*.jks
+
+# Secrets
+.env
+.env.*
+
+# Installers copied here for sharing (built from desktop/src-tauri/target)
+/release/
+
+# Planning notes stay local: README.md is the only Markdown file published
+*.md
+!/README.md

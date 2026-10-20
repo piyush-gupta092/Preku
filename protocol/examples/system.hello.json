@@ -1,0 +1,7 @@
+{
+  "v": 1,
+  "id": "6dbc4b5f-8e90-41a2-9dce-3f4a5b6c7d8e",
+  "type": "system.hello",
+  "ts": 1791500200000,
+  "body": { "deviceName": "Pixel 8", "appVersion": "0.1.0" }
+}

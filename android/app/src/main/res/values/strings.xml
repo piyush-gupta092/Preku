@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Preku</string>
+    <string name="pip_description">Pip, the Preku mascot</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_focus">Focus</string>
+    <string name="nav_tasks">Tasks</string>
+    <string name="nav_wellbeing">Wellbeing</string>
+    <string name="open_settings">Settings</string>
+    <string name="back">Back</string>
+
+    <!-- Home -->
+    <string name="greeting_morning">Good morning</string>
+    <string name="greeting_afternoon">Good afternoon</string>
+    <string name="greeting_evening">Good evening</string>
+    <string name="greeting_night">Up late?</string>
+    <string name="home_focus_idle">Start a focus session</string>
+    <string name="home_focusing">Focusing · %1$s</string>
+    <string name="home_paused">Paused · %1$s</string>
+    <string name="home_tasks_none">No open tasks</string>
+    <plurals name="home_tasks_open">
+        <item quantity="one">%d open task</item>
+        <item quantity="other">%d open tasks</item>
+    </plurals>
+    <string name="home_water">%1$d of %2$d ml</string>
+    <plurals name="home_habits">
+        <item quantity="one">%1$d of %2$d habit</item>
+        <item quantity="other">%1$d of %2$d habits</item>
+    </plurals>
+    <string name="home_habits_none">Add a habit</string>
+    <string name="home_screen_time">%1$s on screen today</string>
+    <string name="home_screen_setup">Set up screen time</string>
+    <string name="card_focus">Focus</string>
+    <string name="card_tasks">Tasks</string>
+    <string name="card_water">Water</string>
+    <string name="card_habits">Habits</string>
+    <string name="card_screen">Screen time</string>
+
+    <!-- Focus -->
+    <string name="focus_label_hint">What are you focusing on?</string>
+    <string name="focus_minutes">%1$d min</string>
+    <string name="focus_start">Start</string>
+    <string name="focus_pause">Pause</string>
+    <string name="focus_resume">Resume</string>
+    <string name="focus_stop">Stop</string>
+    <string name="focus_ready">Ready when you are</string>
+    <string name="focus_less">Shorter</string>
+    <string name="focus_more">Longer</string>
+    <string name="focus_done_title">Focus session done</string>
+    <string name="focus_done_text">Nice work on \"%1$s\". Time for a short break.</string>
+
+    <!-- Tasks -->
+    <string name="task_hint">Add a task</string>
+    <string name="task_add">Add task</string>
+    <string name="task_delete">Delete task</string>
+    <string name="tasks_empty">Nothing on your list. Add something small to start.</string>
+
+    <!-- Wellbeing -->
+    <string name="water_add">+ %1$d ml</string>
+    <string name="water_undo">Undo last drink</string>
+    <string name="water_of">of %1$d ml</string>
+    <string name="habits_title">Habits</string>
+    <string name="habit_hint">New habit</string>
+    <string name="habit_add">Add habit</string>
+    <string name="habit_delete">Delete habit</string>
+    <string name="habit_check">Check in %1$s</string>
+    <string name="habit_less">One less</string>
+    <string name="habit_more">One more</string>
+    <plurals name="habit_streak">
+        <item quantity="one">%d day streak</item>
+        <item quantity="other">%d day streak</item>
+    </plurals>
+    <string name="habits_empty">Add a habit you want to keep, like stretching or reading.</string>
+    <string name="screen_title">Screen time today</string>
+    <string name="screen_empty">Nothing tracked yet today.</string>
+    <string name="screen_needs_access">Preku needs usage access to show your screen time. Only app names are read, never what\'s on screen.</string>
+    <string name="screen_grant">Allow usage access</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_pip">Your Pip</string>
+    <string name="settings_pip_hint">Pick a body and a color. Same Pip as on your PC.</string>
+    <string name="style_classic">Classic</string>
+    <string name="style_sprout">Sprout</string>
+    <string name="style_ghost">Ghost</string>
+    <string name="style_chubby">Chubby</string>
+    <string name="color_peach">Peach</string>
+    <string name="color_lemon">Lemon</string>
+    <string name="color_mint">Mint</string>
+    <string name="color_sky">Sky</string>
+    <string name="color_lavender">Lavender</string>
+    <string name="color_bubblegum">Bubblegum</string>
+    <string name="color_cocoa">Cocoa</string>
+    <string name="color_snow">Snow</string>
+    <string name="settings_island">Floating island</string>
+    <string name="settings_island_hint">A small Pip pill at the top of your screen, over other apps. Drag it sideways to move it.</string>
+    <string name="settings_island_needs">Needs \"Display over other apps\"</string>
+    <string name="spot_left">Left</string>
+    <string name="spot_center">Center</string>
+    <string name="spot_right">Right</string>
+    <string name="settings_water_goal">Daily water goal</string>
+    <string name="settings_permissions">Permissions</string>
+    <string name="settings_privacy">No account, no cloud. Everything stays on this phone.</string>
+    <string name="version">Version %1$s</string>
+
+    <!-- Permissions / onboarding -->
+    <string name="onboarding_title">Hi, I\'m Pip!</string>
+    <string name="onboarding_text">I can help you focus, keep track of tasks, water and habits, and see your screen time. Each of these is optional: allow what you like, skip the rest.</string>
+    <string name="onboarding_continue">Let\'s go</string>
+    <string name="perm_overlay">Display over other apps</string>
+    <string name="perm_overlay_why">For the floating island at the top of your screen.</string>
+    <string name="perm_notifications">Notifications</string>
+    <string name="perm_notifications_why">To tell you when a focus session ends.</string>
+    <string name="perm_usage">Usage access</string>
+    <string name="perm_usage_why">To show today\'s screen time. App names only.</string>
+    <string name="perm_battery">Battery: unrestricted</string>
+    <string name="perm_battery_why">So Android doesn\'t stop the floating island in the background. Pick Preku in the list.</string>
+    <string name="perm_allow">Allow</string>
+    <string name="perm_granted">Allowed</string>
+
+    <!-- Island + notifications -->
+    <string name="channel_island">Floating island</string>
+    <string name="channel_island_desc">Keeps Pip on your screen. Silent.</string>
+    <string name="channel_focus">Focus sessions</string>
+    <string name="channel_focus_desc">When a focus session ends.</string>
+    <string name="island_notification_title">Pip is on your screen</string>
+    <string name="island_notification_text">Tap to open Preku</string>
+    <string name="island_hide">Hide</string>
+    <string name="island_focusing">Focusing · %1$s</string>
+    <string name="island_paused">Paused · %1$s</string>
+
+    <!-- Phone ↔ PC bridge (Phase 6) -->
+    <string name="pc_title">Your PC</string>
+    <string name="pc_hint">On your PC: Preku Settings → Modules → Phone → Pair a phone. Then scan the code.</string>
+    <string name="pc_scan">Scan the code</string>
+    <string name="pc_scan_prompt">Point at the QR code on your PC</string>
+    <string name="pc_paste_hint">…or paste the pairing link</string>
+    <string name="pc_connect">Connect</string>
+    <string name="pc_bad_link">That isn\'t a Preku pairing link.</string>
+    <string name="pc_pairing">Pairing…</string>
+    <string name="pc_connected">Connected</string>
+    <string name="pc_connecting">Connecting…</string>
+    <string name="pc_offline">Not connected. Pip will reconnect when your PC is on the same Wi-Fi.</string>
+    <string name="pc_unpair">Unpair</string>
+    <string name="pc_privacy">Your phone and PC talk directly over your Wi-Fi, encrypted and pinned to each other. No account, no server.</string>
+    <string name="pc_problem_expired">The code expired. Make a new one on your PC.</string>
+    <string name="pc_problem_invalid">That code didn\'t work. Make a new one on your PC.</string>
+    <string name="pc_problem_not_pairing">Your PC isn\'t pairing right now. Click \"Pair a phone\" on the PC first.</string>
+    <string name="pc_problem_unknown_device">Your PC no longer knows this phone. Pair again.</string>
+    <string name="pc_problem_network">Couldn\'t reach your PC. Are both on the same Wi-Fi?</string>
+    <string name="channel_bridge">PC connection</string>
+    <string name="channel_bridge_desc">Keeps your phone connected to your PC. Silent.</string>
+    <string name="bridge_notification_title">Preku</string>
+    <string name="bridge_looking">Looking for your PC…</string>
+    <string name="bridge_looking_for">Looking for %1$s…</string>
+    <string name="bridge_connected_to">Connected to %1$s</string>
+
+    <!-- File sharing -->
+    <string name="share_label">Send to PC</string>
+    <string name="share_sending">Sending to %1$s…</string>
+    <string name="share_nothing">Nothing to send.</string>
+    <string name="share_not_paired">Pair Preku with your PC first (Settings → Your PC).</string>
+    <string name="share_not_connected">%1$s isn\'t connected. Make sure both are on the same Wi-Fi.</string>
+    <string name="files_title">Files</string>
+    <string name="files_send">Send files to PC</string>
+    <string name="files_saved_in">Files from your PC are saved in Download/Preku.</string>
+    <string name="files_open">Open</string>
+    <string name="files_cancel">Cancel</string>
+    <string name="files_to">to %1$s</string>
+    <string name="files_from">from %1$s</string>
+    <string name="files_waiting">Waiting…</string>
+    <string name="files_done">Done</string>
+    <string name="files_failed">Didn\'t arrive</string>
+    <string name="files_progress">%1$s of %2$s</string>
+    <string name="files_received_title">File from your PC</string>
+    <string name="files_received_text">%1$s · saved to Download/Preku</string>
+    <string name="channel_files">Files from your PC</string>
+    <string name="channel_files_desc">When a file from your PC arrives.</string>
+</resources>

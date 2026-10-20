@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/skill-1.schema.json",
+  "formatVersion": 1,
+  "id": "app.preku.wrist-and-eye-care",
+  "name": "Wrist & eye care",
+  "version": "1.0.0",
+  "author": { "name": "Piyush Gupta" },
+  "description": "Gentle nudges for people who type all day: wrists, eyes and shoulders, during working hours.",
+  "license": "CC0-1.0",
+  "contributes": {
+    "nudges": [
+      {
+        "id": "wrists",
+        "lines": [
+          "Roll your wrists a few times?",
+          "Shake out your hands for a moment.",
+          "Spread your fingers wide, then relax.",
+          "Rest your hands in your lap for a breath."
+        ],
+        "everyMin": 45,
+        "random": true,
+        "days": [1, 2, 3, 4, 5],
+        "between": ["09:00", "19:00"],
+        "sound": "soft-bell"
+      },
+      {
+        "id": "eyes",
+        "lines": [
+          "Look at something far away for 20 seconds.",
+          "Blink slowly a few times.",
+          "Close your eyes for one long breath."
+        ],
+        "everyMin": 30,
+        "random": true,
+        "between": ["08:00", "22:00"],
+        "sound": "none"
+      },
+      {
+        "id": "shoulders",
+        "lines": ["Drop your shoulders away from your ears.", "Roll your shoulders back, twice."],
+        "everyMin": 70,
+        "random": true,
+        "sound": "default"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "soft-bell",
+        "name": "Soft bell",
+        "notes": [
+          { "freq": 880, "at": 0, "length": 0.6, "gain": 0.12, "wave": "sine" },
+          { "freq": 1760, "at": 0, "length": 0.25, "gain": 0.03, "wave": "sine" },
+          { "freq": 1318.5, "at": 0.14, "length": 0.7, "gain": 0.09, "wave": "sine" }
+        ]
+      }
+    ]
+  }
+}

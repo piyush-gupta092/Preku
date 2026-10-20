@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Preku skill (format version 1)",
+  "description": "A data-only add-on for Preku: thoughts for \"A moment for you\", nudges and short sounds. Skills cannot run code, read data or go online.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["formatVersion", "id", "name", "version", "author", "description", "contributes"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "formatVersion": { "const": 1, "description": "Always 1 for this version of the format." },
+    "id": {
+      "type": "string",
+      "maxLength": 100,
+      "pattern": "^[a-z0-9][a-z0-9-]{0,31}(\\.[a-z0-9][a-z0-9-]{0,31}){1,5}$",
+      "description": "Unique, reverse-domain and lowercase, e.g. io.github.yourname.wrist-care. Never change it after publishing: it is how updates are recognised."
+    },
+    "name": { "type": "string", "minLength": 1, "maxLength": 40, "description": "Shown in Settings → Skills." },
+    "version": {
+      "type": "string",
+      "maxLength": 40,
+      "pattern": "^\\d{1,6}\\.\\d{1,6}\\.\\d{1,6}([-+].*)?$",
+      "description": "Semantic version, e.g. 1.0.0. Raise it with every published change."
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "url": { "type": "string", "pattern": "^https://", "maxLength": 300 }
+      }
+    },
+    "description": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "license": { "type": "string", "maxLength": 40, "description": "An SPDX id such as CC0-1.0 or MIT." },
+    "homepage": { "type": "string", "pattern": "^https://", "maxLength": 300 },
+    "contributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "thoughts": {
+          "type": "array",
+          "maxItems": 500,
+          "description": "Lines for \"A moment for you\". One is shown per day, mixed with Preku's own.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text"],
+            "properties": {
+              "text": { "type": "string", "minLength": 1, "maxLength": 140 },
+              "author": { "type": "string", "minLength": 1, "maxLength": 60, "description": "Who said it, if it's a quote." }
+            }
+          }
+        },
+        "nudges": {
+          "type": "array",
+          "maxItems": 10,
+          "description": "Short lines that appear in the notch now and then, during active use only.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "lines", "everyMin"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,31}$" },
+              "lines": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 20,
+                "items": { "type": "string", "minLength": 1, "maxLength": 60 },
+                "description": "Shown in turn, one per nudge."
+              },
+              "everyMin": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 240,
+                "description": "Minutes of active use between two of these nudges."
+              },
+              "random": {
+                "type": "boolean",
+                "default": true,
+                "description": "Land somewhere between 65% and 125% of everyMin instead of on the dot."
+              },
+              "days": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "integer", "minimum": 1, "maximum": 7 },
+                "description": "Weekdays it may appear on: 1 = Monday … 7 = Sunday. Leave out for every day."
+              },
+              "between": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+                "description": "Local hours it may appear in, e.g. [\"09:00\", \"18:00\"]. [\"22:00\", \"06:00\"] spans midnight."
+              },
+              "sound": {
+                "type": "string",
+                "description": "\"default\" (Preku's pop-up sound), \"none\", or the id of one of this skill's sounds."
+              }
+            }
+          }
+        },
+        "sounds": {
+          "type": "array",
+          "maxItems": 5,
+          "description": "Short sounds made of synthesised notes (no audio files). Played only if the user has sounds on.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "name", "notes"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,31}$", "not": { "enum": ["default", "none"] } },
+              "name": { "type": "string", "minLength": 1, "maxLength": 30 },
+              "notes": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 12,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["freq", "at", "length", "gain"],
+                  "properties": {
+                    "freq": { "type": "number", "minimum": 50, "maximum": 4000, "description": "Hz." },
+                    "at": { "type": "number", "minimum": 0, "maximum": 2, "description": "Seconds from the start." },
+                    "length": { "type": "number", "minimum": 0.01, "maximum": 1.5, "description": "Seconds; the whole sound ends by 2 s." },
+                    "gain": { "type": "number", "minimum": 0, "maximum": 0.4, "description": "Loudness, 0–0.4." },
+                    "wave": { "enum": ["sine", "triangle", "square"], "default": "sine" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

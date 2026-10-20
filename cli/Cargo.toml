@@ -1,0 +1,20 @@
+[package]
+name = "preku-cli"
+version = "0.1.0"
+description = "`preku watch <command>`: tell the Preku island when a long command finishes"
+edition = "2021"
+rust-version = "1.80"
+license = "MIT"
+publish = false
+
+[[bin]]
+name = "preku"
+path = "src/main.rs"
+
+[dependencies]
+serde_json = "1"
+
+[profile.release]
+lto = true
+opt-level = "s"
+strip = true

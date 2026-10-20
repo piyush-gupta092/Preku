@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-ack.schema.json",
+  "title": "FileAck",
+  "x-type": "file.ack",
+  "description": "Receiver → sender: chunk `index` is written. The sender keeps at most 4 chunks unacknowledged.",
+  "type": "object",
+  "required": ["transferId", "index"],
+  "properties": {
+    "transferId": { "type": "string", "format": "uuid" },
+    "index": { "type": "integer", "format": "uint32" }
+  }
+}

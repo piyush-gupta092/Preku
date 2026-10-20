@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "unpair.schema.json",
+  "title": "Unpair",
+  "x-type": "device.unpair",
+  "description": "Either side: forget each other. The receiver deletes the pairing and closes.",
+  "type": "object",
+  "required": [],
+  "properties": {}
+}

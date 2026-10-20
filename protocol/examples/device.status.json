@@ -1,0 +1,7 @@
+{
+  "v": 1,
+  "id": "8fde6d71-a0b2-43c4-bfe0-5b6c7d8e9fa0",
+  "type": "device.status",
+  "ts": 1791500200100,
+  "body": { "battery": 82, "charging": false, "network": "wifi" }
+}

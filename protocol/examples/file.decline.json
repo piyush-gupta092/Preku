@@ -1,0 +1,7 @@
+{
+  "v": 1,
+  "id": "11111111-2222-4333-8444-555555555503",
+  "type": "file.decline",
+  "ts": 1791500400010,
+  "body": { "transferId": "a1b2c3d4-e5f6-4789-8abc-def012345678", "reason": "too_large" }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-accept.schema.json",
+  "title": "FileAccept",
+  "x-type": "file.accept",
+  "description": "Receiver → sender: go ahead, send the chunks.",
+  "type": "object",
+  "required": ["transferId"],
+  "properties": { "transferId": { "type": "string", "format": "uuid" } }
+}

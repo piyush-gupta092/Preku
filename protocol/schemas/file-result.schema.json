@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-result.schema.json",
+  "title": "FileResult",
+  "x-type": "file.result",
+  "description": "Receiver → sender: saved (size and SHA-256 matched) or not.",
+  "type": "object",
+  "required": ["transferId", "ok"],
+  "properties": {
+    "transferId": { "type": "string", "format": "uuid" },
+    "ok": { "type": "boolean" },
+    "reason": { "type": "string", "description": "checksum | size | write | cancelled" }
+  }
+}

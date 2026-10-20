@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "envelope.schema.json",
+  "title": "Envelope",
+  "description": "Wrapper around every message sent over the Preku bridge.",
+  "type": "object",
+  "required": ["v", "id", "type", "ts", "body"],
+  "properties": {
+    "v": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 1,
+      "description": "Protocol version (see protocol/VERSION)."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique message id (UUID v4)."
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^[a-z]+([.][a-z_]+)+$",
+      "description": "Message type, `family.action`, e.g. `notification.posted`."
+    },
+    "ts": {
+      "type": "integer",
+      "description": "Sender clock in unix epoch milliseconds."
+    },
+    "body": {
+      "type": "object",
+      "description": "Payload; its schema depends on `type`."
+    }
+  }
+}

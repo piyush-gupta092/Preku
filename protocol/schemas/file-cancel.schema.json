@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-cancel.schema.json",
+  "title": "FileCancel",
+  "x-type": "file.cancel",
+  "description": "Either side: stop this transfer (the receiver deletes what it has).",
+  "type": "object",
+  "required": ["transferId"],
+  "properties": { "transferId": { "type": "string", "format": "uuid" } }
+}

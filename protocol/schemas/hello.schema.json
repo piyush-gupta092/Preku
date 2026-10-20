@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hello.schema.json",
+  "title": "Hello",
+  "x-type": "system.hello",
+  "description": "Phone → PC, first message when an already paired phone connects.",
+  "type": "object",
+  "required": ["deviceName"],
+  "properties": {
+    "deviceName": { "type": "string" },
+    "appVersion": { "type": "string" }
+  }
+}

@@ -1,0 +1,168 @@
+/* Shared building blocks for island module views (inputs, rows, sections). Global but scoped
+   to the island window; components add their own layout on top. */
+
+html[data-window="island"] .pk-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+html[data-window="island"] .pk-section + .pk-section {
+  margin-top: var(--space-3);
+}
+
+html[data-window="island"] .pk-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  font: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--island-text-muted);
+}
+
+html[data-window="island"] .pk-input {
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--space-3);
+  font: var(--text-body);
+  color: var(--island-text);
+  background: var(--island-bg-raised);
+  border: 1px solid var(--island-border);
+  border-radius: var(--radius-sm);
+}
+
+html[data-window="island"] select.pk-input {
+  padding: 0 var(--space-2);
+}
+
+html[data-window="island"] .pk-input::placeholder {
+  color: var(--island-text-muted);
+}
+
+html[data-window="island"] .pk-input:focus-visible {
+  outline: none;
+  border-color: var(--accent, var(--brand));
+}
+
+html[data-window="island"] .pk-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  height: 32px;
+  padding: 0 var(--space-3);
+  font: var(--text-pill);
+  color: var(--island-bg);
+  background: var(--accent, var(--brand));
+  border-radius: var(--radius-sm);
+}
+
+html[data-window="island"] .pk-button.quiet {
+  color: var(--island-text);
+  background: var(--island-bg-raised);
+  border: 1px solid var(--island-border);
+}
+
+html[data-window="island"] .pk-button.danger {
+  color: #fff;
+  background: var(--danger);
+}
+
+html[data-window="island"] .pk-button:disabled {
+  opacity: 0.4;
+}
+
+html[data-window="island"] .pk-icon-button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  color: var(--island-text-muted);
+  border-radius: var(--radius-sm);
+}
+
+html[data-window="island"] .pk-icon-button:hover:not(:disabled) {
+  color: var(--island-text);
+  background: var(--island-bg);
+}
+
+html[data-window="island"] .pk-icon-button:disabled {
+  opacity: 0.3;
+}
+
+html[data-window="island"] .pk-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 34px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+html[data-window="island"] .pk-row:hover {
+  background: var(--island-bg-raised);
+}
+
+html[data-window="island"] .pk-grow {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+html[data-window="island"] .pk-muted {
+  font: var(--text-caption);
+  color: var(--island-text-muted);
+}
+
+html[data-window="island"] .pk-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--island-text-muted);
+}
+
+html[data-window="island"] .pk-dot.ok {
+  background: var(--success);
+}
+
+html[data-window="island"] .pk-dot.bad {
+  background: var(--danger);
+}
+
+html[data-window="island"] .pk-dot.busy {
+  background: var(--warning);
+}
+
+html[data-window="island"] .pk-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+html[data-window="island"] .pk-add {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+html[data-window="island"] .pk-add .pk-input {
+  flex: 1;
+}
+
+html[data-window="island"] .pk-code {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 1px 6px;
+  font: var(--text-mono);
+  color: var(--island-text);
+  background: var(--island-bg-raised);
+  border: 1px solid var(--island-border);
+  border-radius: 6px;
+}

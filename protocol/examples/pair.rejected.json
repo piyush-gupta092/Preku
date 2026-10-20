@@ -1,0 +1,7 @@
+{
+  "v": 1,
+  "id": "5cab3a4e-7d8f-4091-8cbd-2e3f4a5b6c7d",
+  "type": "pair.rejected",
+  "ts": 1791500100060,
+  "body": { "reason": "expired" }
+}

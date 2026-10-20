@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pong.schema.json",
+  "title": "Pong",
+  "x-type": "system.pong",
+  "description": "Reply to system.ping.",
+  "type": "object",
+  "required": ["replyTo"],
+  "properties": {
+    "replyTo": { "type": "string", "format": "uuid" }
+  }
+}

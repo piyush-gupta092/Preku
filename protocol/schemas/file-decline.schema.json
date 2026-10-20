@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-decline.schema.json",
+  "title": "FileDecline",
+  "x-type": "file.decline",
+  "description": "Receiver → sender: not taking this file.",
+  "type": "object",
+  "required": ["transferId", "reason"],
+  "properties": {
+    "transferId": { "type": "string", "format": "uuid" },
+    "reason": { "type": "string", "description": "too_large | no_space | busy | error" }
+  }
+}

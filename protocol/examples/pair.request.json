@@ -1,0 +1,7 @@
+{
+  "v": 1,
+  "id": "3a8f1e2c-5b6d-4e7f-8a9b-0c1d2e3f4a5b",
+  "type": "pair.request",
+  "ts": 1791500100000,
+  "body": { "token": "Zm9vYmFyYmF6cXV4MTIzNA", "deviceName": "Pixel 8", "appVersion": "0.1.0" }
+}

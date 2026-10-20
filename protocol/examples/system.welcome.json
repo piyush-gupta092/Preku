@@ -1,0 +1,7 @@
+{
+  "v": 1,
+  "id": "7ecd5c60-9fa1-42b3-aedf-4a5b6c7d8e9f",
+  "type": "system.welcome",
+  "ts": 1791500200030,
+  "body": { "pcId": "2f1e0d9c-8b7a-4695-a4b3-c2d1e0f9a8b7", "pcName": "Desk PC" }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-done.schema.json",
+  "title": "FileDone",
+  "x-type": "file.done",
+  "description": "Sender → receiver: that was the last chunk.",
+  "type": "object",
+  "required": ["transferId"],
+  "properties": { "transferId": { "type": "string", "format": "uuid" } }
+}

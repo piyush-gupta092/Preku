@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "clipboard-text.schema.json",
+  "title": "ClipboardText",
+  "x-type": "clipboard.text",
+  "description": "Either side: a piece of text or a link the user chose to send. The receiver offers it to copy (the PC copies it at once); a link is never opened by itself.",
+  "type": "object",
+  "required": ["text"],
+  "properties": {
+    "text": { "type": "string", "description": "At most 20000 characters." }
+  }
+}

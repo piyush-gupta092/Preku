@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pair-accepted.schema.json",
+  "title": "PairAccepted",
+  "x-type": "pair.accepted",
+  "description": "PC → phone: paired. The PC has pinned the phone's certificate.",
+  "type": "object",
+  "required": ["pcId", "pcName"],
+  "properties": {
+    "pcId": { "type": "string", "description": "Stable PC identity (UUID), also in the mDNS TXT record." },
+    "pcName": { "type": "string" }
+  }
+}

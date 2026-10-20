@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-chunk.schema.json",
+  "title": "FileChunk",
+  "x-type": "file.chunk",
+  "description": "Sender → receiver: one piece of the file (at most 192 KiB before base64), in order.",
+  "type": "object",
+  "required": ["transferId", "index", "data"],
+  "properties": {
+    "transferId": { "type": "string", "format": "uuid" },
+    "index": { "type": "integer", "format": "uint32", "description": "0, 1, 2… in order." },
+    "data": { "type": "string", "description": "Base64 (standard, padded)." }
+  }
+}

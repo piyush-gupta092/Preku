@@ -1,0 +1,74 @@
+[package]
+name = "preku"
+version = "0.1.0"
+description = "Preku — a tiny companion at the top of your screen"
+edition = "2021"
+rust-version = "1.80"
+license = "MIT"
+publish = false
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-single-instance = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-dialog = "2"
+tokio = { version = "1", features = ["sync", "time", "macros", "net", "io-util", "rt", "fs"] }
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+uuid = { version = "1", features = ["v4"] }
+arboard = "3"
+png = "0.17"
+base64 = "0.22"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+tracing-appender = "0.2"
+rusqlite = { version = "0.32", features = ["bundled"] }
+ts-rs = { version = "10", features = ["no-serde-warnings"] } # skills use deny_unknown_fields, which ts-rs only warns about
+sysinfo = "0.36.1"
+bollard = "0.21.1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
+# Phone bridge (Phase 6). TLS uses ring, not aws-lc (which needs CMake + NASM on Windows).
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+tokio-rustls = { version = "0.26", default-features = false, features = ["ring", "tls12", "logging"] }
+tokio-tungstenite = { version = "0.30", default-features = false, features = ["handshake"] }
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+rcgen = { version = "0.14", default-features = false, features = ["crypto", "pem", "ring"] }
+mdns-sd = "0.21"
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+if-addrs = "0.15"
+sha2 = "0.10"
+
+[target.'cfg(windows)'.dependencies]
+keyring = { version = "3", features = ["windows-native"] }
+windows = { version = "0.62", features = [
+    "Foundation",
+    "Media_Control",
+    "Win32_Foundation",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+    "Win32_System_Power",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "3", features = ["sync-secret-service", "crypto-rust"] }
+gtk = "0.18"
+mpris = "2"
+x11rb = { version = "0.13", features = ["screensaver"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

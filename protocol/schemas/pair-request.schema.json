@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pair-request.schema.json",
+  "title": "PairRequest",
+  "x-type": "pair.request",
+  "description": "Phone → PC, first message on a new connection: the one-time token from the QR. The phone's identity is its TLS client certificate, never a field here.",
+  "type": "object",
+  "required": ["token", "deviceName"],
+  "properties": {
+    "token": { "type": "string", "description": "One-time pairing token from the QR (base64url, 128 bit)." },
+    "deviceName": { "type": "string", "description": "Shown on the PC, e.g. \"Pixel 8\"." },
+    "appVersion": { "type": "string" }
+  }
+}

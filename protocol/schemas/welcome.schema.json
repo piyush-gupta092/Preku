@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "welcome.schema.json",
+  "title": "Welcome",
+  "x-type": "system.welcome",
+  "description": "PC → phone: the phone's certificate is paired; the session is open.",
+  "type": "object",
+  "required": ["pcId", "pcName"],
+  "properties": {
+    "pcId": { "type": "string" },
+    "pcName": { "type": "string" }
+  }
+}

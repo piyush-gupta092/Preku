@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pair-rejected.schema.json",
+  "title": "PairRejected",
+  "x-type": "pair.rejected",
+  "description": "PC → phone: pairing refused; the connection closes right after.",
+  "type": "object",
+  "required": ["reason"],
+  "properties": {
+    "reason": { "type": "string", "description": "expired | invalid | not_pairing | unknown_device" }
+  }
+}
