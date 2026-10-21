@@ -107,6 +107,12 @@ function generateRust() {
     if (schema.description) out.push(`/// ${schema.description}`);
     out.push("#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]");
     out.push('#[serde(rename_all = "camelCase")]');
+    // An empty struct is written as rustfmt writes it (`Unpair {}`), so the check passes on
+    // formatted code.
+    if (fields(schema).length === 0) {
+      out.push(`pub struct ${schema.title} {}`);
+      continue;
+    }
     out.push(`pub struct ${schema.title} {`);
     for (const { name, prop, optional } of fields(schema)) {
       const snakeName = snake(name);
